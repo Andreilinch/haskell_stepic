@@ -1,33 +1,50 @@
 -- Последовательность чисел Фибоначчи 0, 1, 1, 2, 3, 5, 8, 13, 21... легко определить рекурсивно, задав два первых терминирующих значения и определив любое последующее как сумму двух непосредственно предыдущих:
 --
 
-fibonacci 0 = 0
-fibonacci 1 = 1
-fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
+fibonacci' 0 = 0
+fibonacci' 1 = 1
+fibonacci' n = fibonacci' (n - 1) + fibonacci' (n - 2)
 
 --
---Эта функция определена лишь для неотрицательных чисел.Измените определение функции fibonacci так, чтобы она была определена для всех целых чисел и порождала при отрицательных аргументах указанную последовательность.
+-- Эта функция определена лишь для неотрицательных чисел.Измените определение функции fibonacci так, чтобы она была определена для всех целых чисел и порождала при отрицательных аргументах указанную последовательность.
 --
 
-fibonacci :: Integer -> Integer
-fibonacci 0 = 0
-fibonacci 1 = 1
-fibonacci n = if n > 0 then fibonacci (n - 1) + fibonacci (n - 2) else fibonacci (n + 2) - fibonacci (n + 1)
+fibonacci'' :: Integer -> Integer
+fibonacci'' 0 = 0
+fibonacci'' 1 = 1
+fibonacci'' n = if n > 0 then fibonacci'' (n - 1) + fibonacci'' (n - 2) else fibonacci'' (n + 2) - fibonacci'' (n + 1)
 
 -- или так
 
-fibonacci :: Integer -> Integer
-fibonacci n | n > 1     = fibonacci (n - 1) + fibonacci (n - 2)
-            | n < 0     = fibonacci (n + 2) - fibonacci (n + 1)
-            | otherwise = n
+fibonacci''' :: Integer -> Integer
+fibonacci''' n | n > 1     = fibonacci''' (n - 1) + fibonacci''' (n - 2)
+               | n < 0     = fibonacci''' (n + 2) - fibonacci''' (n + 1)
+               | otherwise = n
+
 -- Реализация функции для вычисления числа Фибоначчи, основанная на прямом рекурсивном определении, крайне неэффективна - количество вызовов функции растет экспоненциально с ростом значения аргумента. GHCi позволяет отслеживать использование памяти и затраты времени на вычисление выражения, для этого следует выполнить команду :set +s:
 --
 -- *Main Data.Char> :set +s                                          
---│~
--- *Main Data.Char> fibonacci 30                                                           │~
--- 832040                                                                                  │~
+-- │~
+-- *Main Data.Char> fibonacci''' 30                                                     -- │~
+-- 832040                                                                               -- │~
 -- (1.59 secs, 648,825,280 bytes)
 --
 -- С помощью механизма аккумуляторов попробуйте написать более эффективную реализацию, имеющую линейную сложность (по числу рекурсивных вызовов). Как и в предыдущем задании, функция должна быть определена для всех целых чисел.
+--
+fibonacci4 :: Integer -> Integer
+fibonacci4 n | n == 0     = n
+             | otherwise  = helper 0 1 n 
+
+helper acc1 acc2 0 = acc1
+helper acc1 acc2 n | n > 0 =  helper acc2 (acc1 + acc2) (n - 1)
+                   | otherwise =  helper acc2 (acc1 - acc2) (n + 1)
+
+-- *Main> :set +s
+-- *Main> fibonacci4 30
+-- 832040
+-- (0.00 secs, 81,136 bytes)
+--
+-- Ускорение почти в 8к раз по памяти!
+--
 --
 
