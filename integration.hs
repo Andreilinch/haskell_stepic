@@ -3,12 +3,15 @@
 -- (Используйте равномерную сетку; достаточно 1000 элементарных отрезков.)
 
 integration :: (Double -> Double) -> Double -> Double -> Double
-
 integration f a b | b > a = helper f a b
                   | b < a = helper' f a b
+                  | otherwise = 0
     where
-        h = (b - a) / 1000
-        h' = (a - b) / 1000
-        const = (f a + f b) / 2
-        helper f a b = h * (const + sum [f x | x <- [a, h .. b-2*h]])
-        helper' f a b = (-1) * h' * (const + sum [f x | x <- [a, h' .. b-2*h']])
+        stepResolution = 1000
+        h = (b - a) / stepResolution
+        h' = (a - b) / stepResolution
+        a1 = a + h
+        b1 = b + h'
+        c = (f a + f b) / 2
+        helper f a1 b = h * (c + sum [f x | x <- [a1, h .. b-h]])
+        helper' f a b1 = (-1) * (h') * (c + sum [f x | x <- [b1, h' .. a-h']])
