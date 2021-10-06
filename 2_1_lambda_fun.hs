@@ -62,6 +62,8 @@ sumFstFst = (+) `on` helper
 
 sumFstFst' = (+) `on` (\pp -> fst $ fst pp)
 
+-- композицию функций fst, это можно переписать более компактно
 
+sumFstFst'' = (+) `on` (fst . fst)
 
 
