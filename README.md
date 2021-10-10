@@ -1,4 +1,4 @@
-# Haskell Stepic course
+# Haskell Stepic course summary
 
 [Link](https://stepik.org/course/75/syllabus)
 
