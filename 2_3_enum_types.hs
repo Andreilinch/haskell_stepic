@@ -6,3 +6,33 @@ class Enum a where
   -- так как перечислениям можно предоставить некоторый номер, есть еще две функции
   toEnum :: Int -> a -- переводим значение типа Int в Enum
   fromEnum :: a -> Int -- и наобарот
+
+-- succ 4
+-- 5
+
+-- succ 'z'
+-- '{'
+
+-- fromEnum 'z'
+-- 122
+
+-- toEnum 122 :: Float
+-- 122.0
+
+-- но функции succ и pred не определены на самом большом и самом маленьком
+-- значениях 
+
+-- succ True
+-- *** Exception: Prelude.Enum.Bool.succ: bad argument
+
+-- класс типов Bound нужен как раз для таких случаев
+
+class Bounded a where
+  minBound, maxBound :: a
+
+-- minBound :: Bool
+-- False
+
+-- minBound :: Int
+-- -9223372036854775808
+
