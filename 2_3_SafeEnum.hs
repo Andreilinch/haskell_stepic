@@ -23,3 +23,5 @@ class (???) => SafeEnum a where
 
   spred :: a -> a
   spred = undefined
+
+--- mkgerk
