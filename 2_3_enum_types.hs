@@ -36,3 +36,12 @@ class Bounded a where
 -- minBound :: Int
 -- -9223372036854775808
 
+-- единственный тип, который вляется перечислением, но при этом не является bounded это Integer
+-- этот тип считается "бесконечным" 
+-- Prelude> maxBound :: Integer
+
+-- <interactive>:1:1: error:
+--    • No instance for (Bounded Integer)
+--        arising from a use of ‘maxBound’
+--    • In the expression: maxBound :: Integer
+
