@@ -1,8 +1,8 @@
 -- Реализуйте класс типов
 
-class SafeEnum a where
-  ssucc :: a -> a
-  spred :: a -> a
+-- class SafeEnum a where
+--   ssucc :: a -> a
+--   spred :: a -> a
 
 -- обе функции которого ведут себя как succ и pred стандартного класса Enum, однако являются тотальными, то есть не останавливаются
 -- с ошибкой на наибольшем и наименьшем значениях типа-перечисления соответственно, а обеспечивают циклическое поведение. 
@@ -17,12 +17,13 @@ class SafeEnum a where
 -- GHCi> ssucc True
 -- False
 
-class (???) => SafeEnum a where
+class (Eq a, Enum a, Bounded a) => SafeEnum a where
   ssucc :: a -> a
-  ssucc = undefined
+  ssucc var
+        | var == maxBound = minBound
+        | otherwise       = succ var
 
   spred :: a -> a
-  spred = undefined
-
---
--- 
+  spred var
+        | var == minBound = maxBound
+        | otherwise       = pred var
