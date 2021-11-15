@@ -16,5 +16,6 @@ oddsOnly s | null s == True = error "empty list"
 --            | otherwise = error "empty list"
 
 --  | n < length s = helper (head s : acc) s (n + 1)
+--
 
 if even (head [1, 3, 4, 5, 7]) == True then 1 : [12] else 0
