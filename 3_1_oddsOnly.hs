@@ -9,13 +9,16 @@
 oddsOnly :: Integral a => [a] -> [a]
 oddsOnly s | null s == True = error "empty list"
            | otherwise = helper [] s (length s)  where
-    helper acc s n | 0 == n = acc
-                   | 0 < n = helper (if head s : acc) s (n - 1)
+    helper acc s n | 0 == n = reverse acc
+                   | 0 < n = helper (if (even $ head s) == False then head s : acc else acc) (tail s) (n - 1)
 
--- oddsOnly' s | odd $ head s == True = head s : [] 
---            | otherwise = error "empty list"
+-- Теперь решения из комментариев)
 
---  | n < length s = helper (head s : acc) s (n + 1)
---
+oddsOnly' :: Integral a => [a] -> [a]
+oddsOnly' [] = []
+oddsOnly' (x : xs)
+  | odd x = x : oddsOnly' xs
+  | otherwise = oddsOnly' xs
 
-if even (head [1, 3, 4, 5, 7]) == True then 1 : [12] else 0
+oddsOnly'' :: Integral a => [a] -> [a]
+oddsOnly'' a = [x | x <- a, odd x]
