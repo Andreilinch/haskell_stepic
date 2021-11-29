@@ -10,7 +10,19 @@
 -- GHCi> groupElems [1,2,3,2,4]
 -- [[1],[2],[3],[2],[4]]
 
-groupElems s | null s == True = []
-             | otherwise = helper [] s (length s)  where
-    helper acc s n | 0 == n = reverse acc
-                   | 0 < n = helper (if (even $ head s) == False then head s : acc else acc) (tail s) (n - 1)
+groupElems :: Eq a => [a] -> [[a]]
+groupElems []     = []
+groupElems (x:xs) = acc1 xs [x] []
+  where
+    acc1 []     acc2     all  = reverse $ acc2:all
+    acc1 (x:xs) (z:acc2) all | x == z    = acc1 xs (z:z:acc2) all
+    acc1 (x:xs) (z:acc2) all | otherwise = acc1 xs [x]       ((z:acc2):all)
+
+-- решения из комментов 
+
+groupElems' :: Eq a => [a] -> [[a]]
+groupElems' [] = []
+groupElems' (x : xs) = case groupElems' xs of
+                        [] -> [[x]]
+                        (g : gs) | x == head g -> (x : g) : gs
+                                 | otherwise   -> [x] : g : gs
