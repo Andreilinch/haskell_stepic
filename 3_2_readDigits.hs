@@ -9,7 +9,6 @@
 import Data.Char
 
 readDigits :: String -> (String, String)
-<<<<<<< HEAD
 readDigits = span isDigit
 
 -- решения из комментов
@@ -24,10 +23,4 @@ readDigits' (x:xs)
 
 
 readDigits'' x = (takeWhile isDigit x, dropWhile isDigit x)
-=======
-readDigits (x:xs) = dropWhile (isDigit x) xs
--- readDigits [] = []
--- readDigits (x:xs)
---    | isDigit x == True = x : readDigits xs
---    | otherwise = []
->>>>>>> eefa6401b9157ee77f0cd047dd4b5ee13a9a1f4d
+
