@@ -10,3 +10,18 @@
 qsort :: Ord a => [a] -> [a]
 qsort [] = []
 qsort (x:xs) = qsort (filter (<x) xs) ++ (x : qsort (filter (>=x) xs))
+
+-- неправильно
+--qsort' :: Ord a => [a] -> [a]
+--qsort' [] = []
+--qsort' l@(x:xs) 
+--    | last l <= x = last l : qsort' xs
+--    | otherwise = qsort' xs -- ???
+
+-- из комментов
+qsort'' :: Ord a => [a] -> [a]
+qsort'' [] = []
+qsort'' (x:xs) =
+    let smaller = qsort'' . filter (<=x) $ xs
+        bigger = qsort'' . filter (>x) $ xs
+    in smaller ++ [x] ++ bigger
