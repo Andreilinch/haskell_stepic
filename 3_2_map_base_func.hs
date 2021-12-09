@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+module Demo
+
+>>>>>>> e2a4466c5c1981cb1c907d714eacd8118bcd1064
 import Prelude hiding (and, or, all, any)
 
 and, or :: [Bool] -> Bool
@@ -27,6 +32,7 @@ any p = or . map p
 -- Prelude> any odd [2, 2]
 -- False
 
+<<<<<<< HEAD
 -- Пример:
 -- Нужно взять текст и развернуть каждое слово в нем (функция revWords)
 
@@ -44,3 +50,7 @@ let revWords = unwords . map reverse . words
 -- Prelude> let revWords = unwords . map reverse . words
 -- Prelude> revWords "Abc is not ABC"
 -- "cbA si ton CBA"
+=======
+-- Функция revWords
+
+>>>>>>> e2a4466c5c1981cb1c907d714eacd8118bcd1064
