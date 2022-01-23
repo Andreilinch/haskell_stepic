@@ -1,6 +1,9 @@
 # Haskell Stepic course summary
 
-[Link](https://stepik.org/course/75/syllabus)
+### Ссылки 
+
+- [Курс](https://stepik.org/course/75/syllabus)
+- [Monads & Functors](https://habr.com/ru/post/183150/)
 
 ### Structure:
 
@@ -19,4 +22,7 @@
    - 3_4 - Правая свертка
    - 3_5 - Левая свертка и ее сравнение с правой
    - 3_6 - Родственные сверткам функции
+4. Типы данных
+   - 4.1 - Типы перечислений
+   - 4.2 - Типы произведений и сумм произведений
 
